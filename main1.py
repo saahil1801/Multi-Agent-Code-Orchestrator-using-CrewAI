@@ -55,27 +55,28 @@ def main():
             st.error(f"Error reading the file: {e}")
 
     if execute:
-        agents = AICoderAgents()
-        data_define= agents.datapreprocessing(llm)
-        model_assess = agents.modelbuilding(llm)
-        validcode_agent = agents.validator_agent(llm)
+        with st.spinner("Writing code"):
+            agents = AICoderAgents()
+            data_define= agents.datapreprocessing(llm)
+            model_assess = agents.modelbuilding(llm)
+            validcode_agent = agents.validator_agent(llm)
 
-        tasks=AICoderTasks()
-        task_data_preprocess=tasks.task_data_preprocess(agent=data_define,df=df,uploaded_file=uploaded_file,predictvar=predictvar)
-        task_choose_model=tasks.task_choose_model(agent=model_assess,df=df,uploaded_file=uploaded_file,predictvar=predictvar,context=[task_data_preprocess])
-        task_check_code=tasks.task_check_code(agent=validcode_agent,context=[task_data_preprocess,task_choose_model])
+            tasks=AICoderTasks()
+            task_data_preprocess=tasks.task_data_preprocess(agent=data_define,df=df,uploaded_file=uploaded_file,predictvar=predictvar)
+            task_choose_model=tasks.task_choose_model(agent=model_assess,df=df,uploaded_file=uploaded_file,predictvar=predictvar,context=[task_data_preprocess])
+            task_check_code=tasks.task_check_code(agent=validcode_agent,context=[task_data_preprocess,task_choose_model])
 
-        crew = Crew(
-            agents = [data_define,model_assess,validcode_agent],
-            tasks = [task_data_preprocess,task_choose_model,task_check_code],
-            process = Process.sequential,
-            # manager_llm=llm,
-            verbose=True
-        )
+            crew = Crew(
+                agents = [data_define,model_assess,validcode_agent],
+                tasks = [task_data_preprocess,task_choose_model,task_check_code],
+                process = Process.sequential,
+                # manager_llm=llm,
+                verbose=True
+            )
 
-        results = crew.kickoff()
+            results = crew.kickoff()
 
-        st.write(results)
+            st.write(results)
 
 if __name__ == '__main__':
     main()

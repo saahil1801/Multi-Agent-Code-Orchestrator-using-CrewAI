@@ -26,8 +26,9 @@ class AICoderTasks():
     def task_choose_model(self,agent,df,uploaded_file,predictvar,context):
         return Task(
                     description="""
-                    Build a AI coding flow on the next phases after data_preprocessing (in a structure/format similar
-                    to data_preprocessing flow) to solve the problem based on the data {df} and the variable to be predicted {predictvariable}.
+                    Build a AI coding flow on the next phases after data_preprocessing like model_building , model_evaluation ,hp_tuning and
+                    .... etc(in a structure/format similar to data_preprocessing flow) to solve the problem based on the data {df} 
+                    and the variable to be predicted {predictvariable}.
                     The variable data types are {dtypes}
     
                     The file name is called {uploaded_file}
