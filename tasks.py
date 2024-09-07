@@ -12,10 +12,12 @@ class AICoderTasks():
                     {df}
             The file name is called {uploaded_file}
             The variable to predict is {predictvariable}
+            The variable data types are {dtypes}
+            Stick only to the phases in data preprocessing , do not go beyond that like  model_building , hp_tuning etc. 
 
             Code your plan and pass all of this to model_building_agent
 
-                """.format(df=df.head(50),uploaded_file=uploaded_file,predictvariable=predictvar),
+                """.format(df=df.head(50),uploaded_file=uploaded_file,predictvariable=predictvar,dtypes=df.dtypes),
             agent=agent,
             expected_output="""A coding flow with correct data preprocessing and feature engineering steps based on the 
             data given ."""
@@ -26,11 +28,11 @@ class AICoderTasks():
                     description="""
                     Build a AI coding flow on the next phases after data_preprocessing (in a structure/format similar
                     to data_preprocessing flow) to solve the problem based on the data {df} and the variable to be predicted {predictvariable}.
-                
+                    The variable data types are {dtypes}
     
                     The file name is called {uploaded_file}
-                    Pass the entire code , The code output provided by data_define agent and the entire code that you generated
-                    """.format(df=df.head(),uploaded_file=uploaded_file,predictvariable=predictvar),
+                    Pass the entire code , The code output provided by data_preprocessing_agent and the entire code that you generated
+                    """.format(df=df.head(),uploaded_file=uploaded_file,predictvariable=predictvar,dtypes=df.dtypes),
                     agent=agent,
                     expected_output=""" The entire code output provided  + the entire code that 
                     you generated (on the next phases after data_preprocessing""",
@@ -40,7 +42,7 @@ class AICoderTasks():
     def task_check_code(self,agent,context):       
 
             return Task(
-            description="""Check the entire code ,assessing the steps coding flow and fixing any and all types of error""",
+            description="""Check the entire code provided by model_building_agent , assessing the steps coding flow and fixing any and all types of error""",
             agent=agent,
             expected_output="""The entire code provided , that has been revised by the and is free of any errors or 
             issues identified during the validation process. """,
