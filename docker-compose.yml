@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollamav:/root/.ollama  # Ensure volume syntax is correct 
+    command: ["serve"]  # Start serving the model after pulling it
+    
+
+  streamlit:
+    image: crewai-streamlit-app1:latest
+    ports:
+      - "8501:8501"
+     # Wait until ollama service is healthy
+    

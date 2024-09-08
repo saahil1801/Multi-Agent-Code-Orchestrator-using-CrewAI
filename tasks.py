@@ -13,7 +13,8 @@ class AICoderTasks():
             The file name is called {uploaded_file}
             The variable to predict is {predictvariable}
             The variable data types are {dtypes}
-            Stick only to the phases in data preprocessing , do not go beyond that like  model_building , hp_tuning etc. 
+            Stick only to the phases like encoding categorical variables, feature scaling, and selection 
+            and more in feature engineering and more in data preprocessing , REMEMBER do not go beyond that TO  like  model_building , hp_tuning etc. 
 
             Code your plan and pass all of this to model_building_agent
 

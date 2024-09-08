@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from crewai import Agent, Task, Crew , Process
 from langchain_ollama import ChatOllama
-from langchain_groq import ChatGroq
+
 from langchain.chains import ConversationChain
 from agents import AICoderAgents
 from tasks import AICoderTasks
@@ -23,7 +23,7 @@ def main():
     #     )
 
     llm = ChatOllama(
-    model = "llama3.1")
+    model = "llama3.1" , base_url="http://ollama:11434",)
     #ollama pull llama3.1
     #ollama run llama3.1
     
@@ -76,7 +76,8 @@ def main():
 
             results = crew.kickoff()
 
-            st.write(results)
+            st.write(results.raw)
+            
 
 if __name__ == '__main__':
     main()
